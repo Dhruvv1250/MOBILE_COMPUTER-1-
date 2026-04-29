@@ -1,0 +1,63 @@
+package com.hemanth.radiobuttonapp;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    RadioGroup radioGroup;
+    Button showBtn;
+    TextView resultText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        radioGroup = findViewById(R.id.radioGroup);
+        showBtn = findViewById(R.id.showBtn);
+        resultText = findViewById(R.id.resultText);
+
+        showBtn.setOnClickListener(v -> {
+
+            int selectedId = radioGroup.getCheckedRadioButtonId();
+
+            if (selectedId == -1) {
+                resultText.setText("Please select an option");
+            } else {
+                RadioButton selectedRadio = findViewById(selectedId);
+                resultText.setText("Selected: " + selectedRadio.getText());
+            }
+        });
+    }
+}
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Experiment10_RadioButtonApp">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
